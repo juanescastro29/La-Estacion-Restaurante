@@ -1,0 +1,5 @@
+export const PRODUCTS = "/admin/products"
+export const CLIENTS = "/admin/clients"
+export const DOMICILES = "/admin/domiciles"
+export const BOOKINGS = "/admin/bookings"
+export const USERBOOKING = "/user/booking"

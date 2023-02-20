@@ -17,20 +17,27 @@ public class Product {
     private String productName;
     @Column(name = "productDescription")
     private String productDescription;
+    @Column(name = "productImage")
+    private String productImage;
     @Column(name = "productPrice")
     private double productPrice;
-    @Column(name = "stock")
+    @Column(name = "stock", nullable = true)
     private int stock;
-    @Column(name = "minStock")
+    @Column(name = "minStock", nullable = true)
     private int minStock;
     @Column(name = "iva")
     private double iva;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "categoryId", referencedColumnName = "categoryId")
     private Category category;
     @OneToMany(mappedBy = "product")
     @JsonIgnore
     private List<Order> orders;
+
+    @PreRemove
+    public void nullable(){
+        orders.forEach(order -> order.setProduct(null));
+    }
 
     public Product() {
 
@@ -58,6 +65,14 @@ public class Product {
 
     public void setProductDescription(String productDescription) {
         this.productDescription = productDescription;
+    }
+
+    public String getProductImage() {
+        return productImage;
+    }
+
+    public void setProductImage(String productImage) {
+        this.productImage = productImage;
     }
 
     public double getProductPrice() {

@@ -14,13 +14,20 @@ public class Domicile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "domicileId", unique = true)
     private int domicileId;
+
     @Column(name = "domicileDate")
     private Date domicileDate;
+
     @Column(name = "domicileCost")
     private double domicileCost;
+
     @OneToMany(mappedBy = "domicile")
     @JsonIgnore
     private List<Order> ordersDetails;
+
+    @ManyToOne
+    @JoinColumn(name = "documentId", referencedColumnName = "documentId")
+    private User user;
 
     public Domicile() {
 
@@ -56,5 +63,13 @@ public class Domicile {
 
     public void setOrdersDetails(List<Order> ordersDetails) {
         this.ordersDetails = ordersDetails;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -1,0 +1,14 @@
+.navbar-toggler:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.custom-bg{
+  opacity: 0.9 !important;
+  background-color: #b5ab85 !important;
+  color: #0f020a !important;
+}
+
+.nav-link{
+  color: #0f020a !important;
+}

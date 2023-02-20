@@ -1,5 +1,9 @@
 package restaurantebackend.model;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,11 +14,11 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderId")
     private int orderId;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "domicileId", referencedColumnName = "domicileId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "domicileId", referencedColumnName = "domicileId")
     private Domicile domicile;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId", referencedColumnName = "productId", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
     private Product product;
 
     public Order() {

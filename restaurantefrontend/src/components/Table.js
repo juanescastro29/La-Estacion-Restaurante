@@ -193,7 +193,6 @@ const Table = ({ data, dataType }) => {
                             style={{ fontSize: 20, color: "#0f020a" }}
                           ></i>
                         </button>
-                        <DetailsModal />
                       </>
                     }
                   </td>

@@ -31,7 +31,7 @@ const Footer = () => {
         <ul className="nav col-md-4 justify-content-center">
           <li className="nav-item">
             <a
-              href="https://github.com/juanescastro29/Video-Gallery"
+              href="https://wa.me/3212000312"
               className="nav-link px-2 text-white"
               target="_blank"
               rel="noreferrer"
@@ -44,7 +44,7 @@ const Footer = () => {
           </li>
           <li className="nav-item">
             <a
-              href="https://github.com/juanescastro29"
+              href="https://www.facebook.com/LaEstacionRP/?locale=es_LA"
               className="nav-link px-2 text-white"
               target="_blank"
               rel="noreferrer"
@@ -57,7 +57,7 @@ const Footer = () => {
           </li>
           <li className="nav-item">
             <a
-              href="https://www.linkedin.com/in/juan-esteban-castro-molano-248912150/"
+              href="https://www.instagram.com/la_estacion_restaurante_/"
               className="nav-link px-2 text-white"
               target="_blank"
               rel="noreferrer"

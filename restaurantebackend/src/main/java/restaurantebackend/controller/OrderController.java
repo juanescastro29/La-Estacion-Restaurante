@@ -15,9 +15,4 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-    @GetMapping("/orderProducts/{orderId}")
-    public ResponseEntity<String> getOrderProducts(@PathVariable Integer orderId) {
-
-    }
-
 }

@@ -5,11 +5,11 @@ import { NavLink } from "react-router-dom";
 const Footer = () => {
   return (
     <div
-      className="container-fluid fixed-bottom"
+      className="container-fluid static-bottom"
       style={{ background: "#b5ab85" }}
     >
       <footer
-        className="d-flex justify-content-between align-items-center border-top border-2 border-dark static-bottom"
+        className="d-flex justify-content-between align-items-center border-top border-2 border-dark"
         style={{ height: "81px"}}
       >
         <p className="col-md-4 text-center" style={{ color: "#0f020a" }}>

@@ -1,10 +1,10 @@
 package restaurantebackend.controller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import restaurantebackend.model.Product;
 import restaurantebackend.model.User;
 import restaurantebackend.service.UserService;
 
@@ -22,15 +22,15 @@ public class UserController {
     public ResponseEntity<Object> addUser(@RequestBody User user) {
         Map<String, Object> response = new HashMap<>();
         for (int i = 0; i < userService.getUsers().size(); i++) {
-            if (((int) user.getUserDocumentId() == userService.getUsers().get(i).getUserDocumentId()) || (user.getEmail().equals(userService.getUsers().get(i).getEmail()))) {
-                response.put("route", "");
+            if (((int) user.getUserDocumentId() == userService.getUsers().get(i).getUserDocumentId()) || (user.getEmail().equals(userService.getUsers().get(i).getEmail())) || (user.getUserName().equals(userService.getUsers().get(i).getUserName()))) {
+                response.put("route", "/");
                 response.put("error", "Usuario ya registrado");
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
         }
         user.setRole("USER");
         userService.saveUser(user);
-        response.put("route", "/");
+        response.put("route", "/login");
         response.put("error", "");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

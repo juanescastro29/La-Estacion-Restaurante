@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from "react";
+import AddModal from "../../components/AddModal";
 import Table from "../../components/Table";
 
 const Products = () => {
-
   const [productsData, setProductsData] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchSponsorships() {
-      const response = await fetch(`http://localhost:8080/product/showProducts/${page}`);
+      const response = await fetch(
+        `http://localhost:8080/product/showProducts/${page}`
+      );
       const data = await response.json();
       setProductsData(data);
     }
     fetchSponsorships();
-  }, [page])
+  }, [page]);
 
   return (
-    <div className="container p-4">
+    <div className="container-fluid p-4">
       {page >= 2 ? (
-        <div className="container">
+        <div className="container-fluid">
           {productsData.length === 0 ? (
             <>
               <Table data={productsData} dataType={"products"} />
@@ -71,7 +73,7 @@ const Products = () => {
           </div>
         </div>
       ) : (
-        <div className="container">
+        <div className="container-fluid">
           {productsData.length === 0 ? (
             <>
               <Table data={productsData} dataType={"products"} />
@@ -139,6 +141,18 @@ const Products = () => {
           </div>
         </div>
       )}
+      <div className="container-fluid text-end">
+        <button
+          type="button"
+          className="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#addModal"
+          style={{ background: "#0f020a", color: "#dad49c" }}
+        >
+          Agregar Productos
+        </button>
+        <AddModal type={"product"}/>
+      </div>
     </div>
   );
 };

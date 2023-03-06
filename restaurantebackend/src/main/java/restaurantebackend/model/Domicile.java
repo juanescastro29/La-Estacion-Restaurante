@@ -1,5 +1,6 @@
 package restaurantebackend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Domicile {
     private int domicileId;
 
     @Column(name = "domicileDate")
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm", timezone="GMT-5")
     private Date domicileDate;
 
     @Column(name = "domicileCost")

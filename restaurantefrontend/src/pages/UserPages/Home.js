@@ -2,22 +2,25 @@ import React from "react";
 
 const Home = () => {
   return (
-      <div className="container-xl p-4 align-items-center justify-content-center" style={{height: "76vh"}}>
+      <div className="container p-4 align-items-center justify-content-center">
         <div className="row g-2 p-4">
           <div className="col-md-6 bg bg-dark text-white d-flex align-items-center text-center p-4">
             <h1>
-              Restaurante<br />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;La Estacion
+              Restaurante
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;La
+              Estacion
             </h1>
           </div>
-          <div className="col-md-6 p-4" style={{color: "#0f020a"}}>
+          <div className="col-md-6 p-4" style={{ color: "#0f020a" }}>
             <h1>¿Quienes somos?</h1>
             <p style={{ textAlign: "justify" }}>
-              Hola nosotros somos restaurante la estacion, prestamos los siguientes servicios
+              Hola nosotros somos restaurante la estacion, prestamos los
+              siguientes servicios
             </p>
             <ul
               className="list-group list-group-flush"
-              style={{ textAlign: "justify"}}
+              style={{ textAlign: "justify" }}
             >
               <li
                 className="list-group-item"

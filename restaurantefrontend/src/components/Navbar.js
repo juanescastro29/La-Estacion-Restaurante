@@ -13,7 +13,7 @@ const Navbar = () => {
 
   return (
     <nav
-      className="navbar static-top"
+      className="navbar"
       style={{ background: "#b5ab85" }}
     >
       <div className="container-fluid">

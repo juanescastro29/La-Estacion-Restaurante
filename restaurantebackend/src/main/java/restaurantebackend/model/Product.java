@@ -23,8 +23,6 @@ public class Product {
     private double productPrice;
     @Column(name = "stock", nullable = true)
     private int stock;
-    @Column(name = "minStock", nullable = true)
-    private int minStock;
     @Column(name = "iva")
     private double iva;
     @ManyToOne
@@ -89,14 +87,6 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
-    }
-
-    public int getMinStock() {
-        return minStock;
-    }
-
-    public void setMinStock(int minStock) {
-        this.minStock = minStock;
     }
 
     public double getIva() {

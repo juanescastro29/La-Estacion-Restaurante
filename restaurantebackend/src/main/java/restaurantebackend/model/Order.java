@@ -14,6 +14,8 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "orderId")
     private int orderId;
+    @Column(name = "productAmount", nullable = false)
+    private int productAmount;
     @ManyToOne
     @JoinColumn(name = "domicileId", referencedColumnName = "domicileId")
     private Domicile domicile;
@@ -31,6 +33,14 @@ public class Order {
 
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public int getProductAmount() {
+        return productAmount;
+    }
+
+    public void setProductAmount(int productAmount) {
+        this.productAmount = productAmount;
     }
 
     public Domicile getDomicile() {

@@ -15,9 +15,9 @@ const Domiciles = () => {
   }, [page])
 
   return (
-    <div className="container p-4">
+    <div className="container-fluid p-4">
       {page >= 2 ? (
-        <div className="container">
+        <div className="container-fluid">
           {domicilesData.length === 0 ? (
             <>
               <Table data={domicilesData} dataType={"domiciles"} />
@@ -70,7 +70,7 @@ const Domiciles = () => {
           </div>
         </div>
       ) : (
-        <div className="container">
+        <div className="container-fluid">
           {domicilesData.length === 0 ? (
             <>
               <Table data={domicilesData} dataType={"domiciles"} />

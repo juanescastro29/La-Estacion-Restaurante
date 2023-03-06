@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 import EditModal from "./EditModal";
 import DetailsModal from "./DetailsModal";
-import { set } from "react-hook-form";
 
 const Table = ({ data, dataType }) => {
 
-  const [productEdit, setProductEdit] = useState({})
+  const [productEdit, setProductEdit] = useState([])
+  const [domicileDetails, setDomicileDetails] = useState([])
   const [elementId, setElementId] = useState(0)
 
   function searchProduct(productId) {
@@ -14,6 +14,12 @@ const Table = ({ data, dataType }) => {
       return product.productId === productId;
     });
     setProductEdit(productData);
+  }
+
+  async function detailsDomicile(domicileId){
+    const response = await fetch(`http://localhost:8080/order/showOrder/${domicileId}`)
+    const data = await response.json()
+    setDomicileDetails(data);
   }
 
   return (
@@ -187,12 +193,16 @@ const Table = ({ data, dataType }) => {
                           className="border-0 bg-transparent"
                           data-bs-toggle="modal"
                           data-bs-target="#detailsModal"
+                          onClick={() => {
+                            detailsDomicile(domicileId)
+                          }}
                         >
                           <i
                             className="bi bi-journals"
                             style={{ fontSize: 20, color: "#0f020a" }}
                           ></i>
                         </button>
+                        <DetailsModal details={domicileDetails}/>
                       </>
                     }
                   </td>

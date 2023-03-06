@@ -7,6 +7,17 @@ const MenuNoSession = () => {
     <>
       <li className="nav-item">
         <NavLink
+          to="/home"
+          className="nav-link"
+          style={({ isActive }) => ({
+            background: isActive && "#dfcc97",
+          })}
+        >
+          Inicio
+        </NavLink>
+      </li>
+      <li className="nav-item">
+        <NavLink
           to="/login"
           className="nav-link"
           style={({ isActive }) => ({

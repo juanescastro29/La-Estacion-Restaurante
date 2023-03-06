@@ -17,9 +17,9 @@ const Bookings = () => {
   }, [page]);
 
   return (
-    <div className="container p-4">
+    <div className="container-fluid p-4">
       {page >= 2 ? (
-        <div className="container">
+        <div className="container-fluid">
           {bookingsData.length === 0 ? (
             <>
               <Table data={bookingsData} dataType={"bookings"} />
@@ -72,7 +72,7 @@ const Bookings = () => {
           </div>
         </div>
       ) : (
-        <div className="container">
+        <div className="container-fluid">
           {bookingsData.length === 0 ? (
             <>
               <Table data={bookingsData} dataType={"bookings"} />

@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import restaurantebackend.model.Product;
 import restaurantebackend.service.ProductService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -36,6 +33,12 @@ public class ProductController {
         }
 
         return productsLimited;
+    }
+
+    @PostMapping("/createProduct/")
+    public ResponseEntity<Object> addProduct(@RequestBody Product product) {
+        productService.saveProduct(product);
+        return new ResponseEntity<>("Product create successfully", HttpStatus.OK);
     }
 
     @PutMapping("/updateProduct/{productId}")

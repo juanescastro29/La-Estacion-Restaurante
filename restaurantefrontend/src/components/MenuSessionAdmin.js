@@ -47,7 +47,7 @@ const MenuSessionAdmin = () => {
         <NavLink to="/home" className="nav-link" style={({ isActive }) => ({
             background: isActive && "#dfcc97",
           })} onClick={() => (logout())}>
-          Cerrar Sesion
+          Cerrar Sesión
         </NavLink>
       </li>
     </>

@@ -4,10 +4,10 @@ import EditModal from "./EditModal";
 import DetailsModal from "./DetailsModal";
 
 const Table = ({ data, dataType }) => {
-
-  const [productEdit, setProductEdit] = useState([])
-  const [domicileDetails, setDomicileDetails] = useState([])
-  const [elementId, setElementId] = useState(0)
+  const [productEdit, setProductEdit] = useState([]);
+  const [bookingEdit, setBookingEdit] = useState([]);
+  const [domicileDetails, setDomicileDetails] = useState([]);
+  const [elementId, setElementId] = useState(0);
 
   function searchProduct(productId) {
     const productData = data.find((product) => {
@@ -16,9 +16,18 @@ const Table = ({ data, dataType }) => {
     setProductEdit(productData);
   }
 
-  async function detailsDomicile(domicileId){
-    const response = await fetch(`http://localhost:8080/order/showOrder/${domicileId}`)
-    const data = await response.json()
+  function searchBooking(bookingId) {
+    const bookingData = data.find((booking) => {
+      return booking.bookingId === bookingId;
+    });
+    setBookingEdit(bookingData);
+  }
+
+  async function detailsDomicile(domicileId) {
+    const response = await fetch(
+      `http://localhost:8080/order/showOrder/${domicileId}`
+    );
+    const data = await response.json();
     setDomicileDetails(data);
   }
 
@@ -77,7 +86,9 @@ const Table = ({ data, dataType }) => {
                 <th scope="col">Id Domicilio</th>
                 <th scope="col">Costo Domicilio</th>
                 <th scope="col">Fecha Domicilio</th>
+                <th scope="col">Estado Domicilio</th>
                 <th scope="col">Id persona</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
             </>
@@ -88,7 +99,9 @@ const Table = ({ data, dataType }) => {
                 <th scope="col">Id reserva</th>
                 <th scope="col">Fecha reserva</th>
                 <th scope="col">Hora reserva</th>
+                <th scope="col">Estado reserva</th>
                 <th scope="col">Id persona</th>
+                <th scope="col"></th>
                 <th scope="col"></th>
               </tr>
             </>
@@ -111,7 +124,7 @@ const Table = ({ data, dataType }) => {
                     <td>{iva}</td>
                     <td>{productDescription}</td>
                     <td>{stock}</td>
-                    <td align="center" className="">
+                    <td align="center">
                       {
                         <>
                           <button
@@ -126,11 +139,11 @@ const Table = ({ data, dataType }) => {
                               style={{ fontSize: 20, color: "#0f020a" }}
                             ></i>
                           </button>
-                          <EditModal data={productEdit} type={"product"}/>
+                          <EditModal data={productEdit} type={"product"} />
                         </>
                       }
                     </td>
-                    <td align="center" className="">
+                    <td align="center">
                       {
                         <>
                           <button
@@ -145,7 +158,7 @@ const Table = ({ data, dataType }) => {
                               style={{ fontSize: 20, color: "#0f020a" }}
                             ></i>
                           </button>
-                          <ConfirmModal type={"products"} id={elementId}/>
+                          <ConfirmModal type={"products"} id={elementId} />
                         </>
                       }
                     </td>
@@ -179,63 +192,124 @@ const Table = ({ data, dataType }) => {
           )}
           {dataType === "domiciles" && (
             <>
-              {data.map(({ domicileId, domicileCost, domicileDate, user }) => (
-                <tr key={domicileId}>
-                  <th scope="row">{domicileId}</th>
-                  <td>{domicileCost}</td>
-                  <td>{domicileDate}</td>
-                  <td>{user.userDocumentId}</td>
-                  <td align="center" className="">
-                    {
-                      <>
-                        <button
-                          type="button"
-                          className="border-0 bg-transparent"
-                          data-bs-toggle="modal"
-                          data-bs-target="#detailsModal"
-                          onClick={() => {
-                            detailsDomicile(domicileId)
-                          }}
-                        >
-                          <i
-                            className="bi bi-journals"
-                            style={{ fontSize: 20, color: "#0f020a" }}
-                          ></i>
-                        </button>
-                        <DetailsModal details={domicileDetails}/>
-                      </>
-                    }
-                  </td>
-                </tr>
-              ))}
+              {data.map(
+                ({
+                  domicileId,
+                  domicileCost,
+                  domicileDate,
+                  domicileStatus,
+                  user,
+                }) => (
+                  <tr key={domicileId}>
+                    <th scope="row">{domicileId}</th>
+                    <td>{domicileCost}</td>
+                    <td>{domicileDate}</td>
+                    <td>{domicileStatus}</td>
+                    <td>{user.userDocumentId}</td>
+                    <td align="center">
+                      {
+                        <>
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            data-bs-toggle="modal"
+                            data-bs-target="#detailsModal"
+                            onClick={() => {
+                              detailsDomicile(domicileId);
+                            }}
+                          >
+                            <i
+                              className="bi bi-journals"
+                              style={{ fontSize: 20, color: "#0f020a" }}
+                            ></i>
+                          </button>
+                          <DetailsModal details={domicileDetails} />
+                        </>
+                      }
+                    </td>
+                    <td align="center">
+                      {domicileStatus === "Activo" && (
+                        <>
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirmModal"
+                            onClick={() => {
+                              setElementId(domicileId);
+                            }}
+                          >
+                            <i
+                              className="bi bi-dash-circle"
+                              style={{ fontSize: 20, color: "#0f020a" }}
+                            ></i>
+                          </button>
+                          <ConfirmModal type={"domiciles"} id={elementId} />
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                )
+              )}
             </>
           )}
           {dataType === "bookings" && (
             <>
-              {data.map(({ bookingId, bookingDate, bookingHour, user }) => (
-                <tr key={bookingId}>
-                  <th scope="row">{bookingId}</th>
-                  <td>{bookingDate}</td>
-                  <td>{bookingHour}</td>
-                  <td>{user.userDocumentId}</td>
-                  <td>
-                    <>
-                      <button
-                        type="button"
-                        className="border-0 bg-transparent"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editModal"
-                      >
-                        <i
-                          className="bi bi-pencil"
-                          style={{ fontSize: 20, color: "#0f020a" }}
-                        ></i>
-                      </button>
-                      <EditModal />
-                    </>
-                  </td>
-                </tr>
-              ))}
+              {data.map(
+                ({
+                  bookingId,
+                  bookingDate,
+                  bookingHour,
+                  bookingStatus,
+                  user,
+                }) => (
+                  <tr key={bookingId}>
+                    <th scope="row">{bookingId}</th>
+                    <td>{bookingDate}</td>
+                    <td>{bookingHour}</td>
+                    <td>{bookingStatus}</td>
+                    <td>{user.userDocumentId}</td>
+                    <td align="center">
+                      {bookingStatus === "Activa" && (
+                        <>
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            data-bs-toggle="modal"
+                            data-bs-target="#editModal"
+                            onClick={() => searchBooking(bookingId)}
+                          >
+                            <i
+                              className="bi bi-pencil"
+                              style={{ fontSize: 20, color: "#0f020a" }}
+                            ></i>
+                          </button>
+                          <EditModal data={bookingEdit} type={"booking"} />
+                        </>
+                      )}
+                    </td>
+                    <td align="center">
+                      {bookingStatus === "Activa" && (
+                        <>
+                          <button
+                            type="button"
+                            className="border-0 bg-transparent"
+                            data-bs-toggle="modal"
+                            data-bs-target="#confirmModal"
+                            onClick={() => setElementId(bookingId)}
+                          >
+                            <i
+                              className="bi bi-clipboard-x"
+                              style={{ fontSize: 20, color: "#0f020a" }}
+                            ></i>
+                          </button>
+                          <ConfirmModal type={"bookings"} id={elementId} />
+                        </>
+                      )}
+                    </td>
+                  </tr>
+                )
+              )}
             </>
           )}
         </tbody>

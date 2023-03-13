@@ -1,30 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import './Modal.css'
+import "./Modal.css";
 
 const EditModal = ({ data, type }) => {
   const { register, handleSubmit } = useForm();
-  const [adoptionResponse, setAdoptionResponse] = useState("");
+  const [bookingResponse, setBookingResponse] = useState("")
   const [productResponse, setProductResponse] = useState("");
-
-  async function updateAdoption(dataForm) {
-    const update = {
-      adoption_comments: dataForm.commentsAdoption,
-      status: dataForm.stateAdoption,
-    };
-    const response = await fetch(
-      `http://localhost:8081/adoption/updateAdoption/${data.adoption_id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(update),
-      }
-    );
-    const dataBack = await response.text();
-    setAdoptionResponse(dataBack);
-  }
 
   async function updateProduct(dataForm) {
     if (dataForm.productImage[0]) {
@@ -66,6 +47,21 @@ const EditModal = ({ data, type }) => {
     );
     const dataBack = await response.text();
     setProductResponse(dataBack);
+  }
+
+  async function updateBooking(dataForm) {
+    const response = await fetch(
+      `http://localhost:8080/booking/updateBooking/${data.bookingId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(dataForm),
+      }
+    );
+    const dataBack = await response.text();
+    setBookingResponse(dataBack);
   }
 
   return (
@@ -179,7 +175,7 @@ const EditModal = ({ data, type }) => {
           </div>
         </div>
       )}
-      {type === "adoption" && (
+      {type === "booking" && (
         <div
           className="modal fade"
           id="editModal"
@@ -190,7 +186,7 @@ const EditModal = ({ data, type }) => {
           <div className="modal-dialog modal-lg modal-dialog-centered">
             <div className="modal-content">
               <div className="modal-header">
-                <h5 className="modal-title">Editar adopción</h5>)
+                <h5 className="modal-title">Editar reserva</h5>
                 <button
                   type="button"
                   className="btn-close"
@@ -199,56 +195,60 @@ const EditModal = ({ data, type }) => {
                 ></button>
               </div>
               <div className="modal-body">
-                <form className="row" onSubmit={handleSubmit(updateAdoption)}>
-                  <div className="col-6">
-                    <label
-                      htmlFor="lastUpdateAdoption"
-                      className="form-label fw-bolder"
-                    >
-                      Última modificación
+                <form className="row" onSubmit={handleSubmit(updateBooking)}>
+                  <div className="col-12 p-3">
+                    <label htmlFor="bookingId" className="form-label fw-bolder">
+                      Id de la reserva:
                     </label>
                     <input
-                      type="text"
-                      className="form-control text-center border-2"
-                      placeholder={data.date_update}
+                      className="form-control border-dark border-2"
+                      defaultValue={data.bookingId}
                       disabled
                     />
                   </div>
-                  <div className="col-6">
+                  <div className="col-6 p-3">
                     <label
-                      htmlFor="stateAdoption"
+                      htmlFor="bookingDate"
                       className="form-label fw-bolder"
                     >
-                      Estado:
+                      Fecha de la reserva:
+                    </label>
+                    <div className="input-group date" data-provide="datepicker">
+                      <input
+                        type="text"
+                        className="form-control border-dark"
+                        data-date-format="mm/dd/yyyy"
+                        defaultValue={data.bookingDate}
+                        {...register("bookingDate")}
+                      />
+                      <div className="input-group-addon">
+                        <span className="glyphicon glyphicon-th"></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-6 p-3">
+                    <label
+                      htmlFor="bookingHour"
+                      className="form-label fw-bolder"
+                    >
+                      Hora:
                     </label>
                     <select
                       className="form-select border-dark"
-                      name="stateAdoption"
-                      id="stateAdoption"
                       autoComplete="nope"
-                      defaultValue={data.status}
-                      {...register("stateAdoption", { required: true })}
+                      defaultValue={data.bookingHour}
+                      {...register("bookingHour", { required: true })}
                     >
-                      <option value="En progreso">En progreso</option>
-                      <option value="Aceptado">Aceptado</option>
-                      <option value="Rechazado">Rechazado</option>
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
                     </select>
-                  </div>
-                  <div className="col-12 p-3">
-                    <label
-                      htmlFor="commentsAdoption"
-                      className="form-label fw-bolder"
-                    >
-                      Comentarios:
-                    </label>
-                    <textarea
-                      className="form-control border-dark"
-                      name="commentsAdopton"
-                      id="commentsAdopton"
-                      defaultValue={data.adoption_comments}
-                      style={{ resize: "none" }}
-                      {...register("commentsAdoption")}
-                    ></textarea>
                   </div>
                   <div className="modal-footer justify-content-center">
                     <button
@@ -293,7 +293,7 @@ const EditModal = ({ data, type }) => {
               ></button>
             </div>
             <div className="modal-body">
-              {adoptionResponse === "Adoption update successfully" ||
+              {bookingResponse === "Booking update successfully" ||
               productResponse === "Product update successfully" ? (
                 <>
                   <div className="f-modal-alert">
@@ -327,7 +327,7 @@ const EditModal = ({ data, type }) => {
               )}
             </div>
             <div className="modal-footer justify-content-center">
-              {adoptionResponse === "Adoption update successfully" ||
+              {bookingResponse === "Booking update successfully" ||
               productResponse === "Product update successfully" ? (
                 <button
                   type="button"

@@ -21,12 +21,20 @@ public class Booking {
     @Column(name = "bookingHour")
     private String bookingHour;
 
+    @Column(name = "bookingStatus")
+    private String bookingStatus;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "documentId", referencedColumnName = "documentId", nullable = false)
     private User user;
 
     public Booking() {
 
+    }
+
+    @PrePersist
+    public void prePersist(){
+        this.bookingStatus = "Activa";
     }
 
     public int getBookingId() {
@@ -51,6 +59,14 @@ public class Booking {
 
     public void setBookingHour(String bookingHour) {
         this.bookingHour = bookingHour;
+    }
+
+    public String getBookingStatus() {
+        return bookingStatus;
+    }
+
+    public void setBookingStatus(String bookingStatus) {
+        this.bookingStatus = bookingStatus;
     }
 
     public User getUser() {

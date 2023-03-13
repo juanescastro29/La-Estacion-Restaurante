@@ -34,4 +34,11 @@ public class DomicileController {
         return domicilesLimited;
     }
 
+    @PutMapping("/cancelDomicile/{domicileId}")
+    public void cancelDomicile(@PathVariable Integer domicileId) {
+        Domicile domicile = domicileService.getDomicile(domicileId);
+        domicile.setDomicileStatus("Cancelado");
+        domicileService.saveDomicile(domicile);
+    }
+
 }

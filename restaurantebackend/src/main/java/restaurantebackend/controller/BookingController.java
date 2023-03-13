@@ -1,13 +1,16 @@
 package restaurantebackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurantebackend.model.Booking;
 import restaurantebackend.model.Product;
 import restaurantebackend.service.BookingService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -33,6 +36,35 @@ public class BookingController {
         }
 
         return bookingsLimited;
+    }
+
+    @PutMapping("/updateBooking/{bookingId}")
+    public ResponseEntity<String> updateBooking(@RequestBody Map<String, String> bookingUpdateData, @PathVariable Integer bookingId) {
+        try {
+            Booking bookingFound = bookingService.getBooking(bookingId);
+            if (bookingUpdateData.get("bookingDate") != "") {
+                Date date = new SimpleDateFormat("dd-MM-yyyy").parse(bookingUpdateData.get("bookingDate"));
+                bookingFound.setBookingDate(date);
+            }
+
+            if (bookingUpdateData.get("bookingHour") != "") {
+                bookingFound.setBookingHour(bookingUpdateData.get("bookingHour"));
+            }
+
+            bookingService.saveBooking(bookingFound);
+            return new ResponseEntity<String>("Booking update successfully", HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity<String>("Booking not update", HttpStatus.NOT_FOUND);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @PutMapping("/cancelBooking/{bookingId}")
+    public void cancelBooking(@PathVariable Integer bookingId) {
+        Booking booking = bookingService.getBooking(bookingId);
+        booking.setBookingStatus("Cancelada");
+        bookingService.saveBooking(booking);
     }
 
 }

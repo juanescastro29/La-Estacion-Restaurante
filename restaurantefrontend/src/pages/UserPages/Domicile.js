@@ -1,34 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
-import Table from "../../components/Table";
 import { UserContext } from "../../context/UserContext";
+import Table from "../../components/Table";
 
-const Booking = () => {
+const Domicile = () => {
   const { user } = useContext(UserContext);
-  const [bookingsData, setBookingsData] = useState([]);
+  const [domicilesData, setDomicilesData] = useState([]);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     async function fetchSponsorships() {
-      const response = await fetch(
-        `http://localhost:8080/booking/showBookings/user/${user.userDocumentId}/${page}`
-      );
+      const response = await fetch(`http://localhost:8080/domicile/showDomiciles/user/${user.userDocumentId}/${page}`);
       const data = await response.json();
-      setBookingsData(data);
+      console.log(data);
+      setDomicilesData(data);
     }
     fetchSponsorships();
-  }, [page, user]);
+  }, [page, user])
 
   return (
     <div className="container-fluid p-5 d-flex flex-column min-vh-100">
       {page >= 2 ? (
         <div className="container-fluid">
-          {bookingsData.length === 0 ? (
+          {domicilesData.length === 0 ? (
             <>
-              <Table data={bookingsData} dataType={"bookings"} />
-              <p className="text-center fs-3 fw-bolder">No hay reservas para mostrar.</p>
+              <Table data={domicilesData} dataType={"domiciles"} />
+              <p className="text-center fs-3 fw-bolder">No hay domicilios.</p>
             </>
           ) : (
-            <Table data={bookingsData} dataType={"bookings"} />
+            <Table data={domicilesData} dataType={"domiciles"} />
           )}
           <div className="row">
             <div className="col text-end">
@@ -47,7 +46,7 @@ const Booking = () => {
               <p className="fs-3">{page}</p>
             </div>
             <div className="col text-start">
-              {bookingsData.length < 6 ? (
+              {domicilesData.length < 6 ? (
                 <button
                   className="btn border-0 bg-transparent"
                   type="button"
@@ -75,13 +74,13 @@ const Booking = () => {
         </div>
       ) : (
         <div className="container-fluid">
-          {bookingsData.length === 0 ? (
+          {domicilesData.length === 0 ? (
             <>
-              <Table data={bookingsData} dataType={"bookings"} />
-              <p className="text-center fs-3 fw-bolder">No hay reservas para mostrar.</p>
+              <Table data={domicilesData} dataType={"domiciles"} />
+              <p className="text-center fs-3 fw-bolder">No hay domicilios.</p>
             </>
           ) : (
-            <Table data={bookingsData} dataType={"bookings"} />
+            <Table data={domicilesData} dataType={"domiciles"} />
           )}
           <div className="row">
             <div className="col text-end">
@@ -115,7 +114,7 @@ const Booking = () => {
               <p className="fs-3">{page}</p>
             </div>
             <div className="col text-start">
-              {bookingsData.length < 6 ? (
+              {domicilesData.length < 6 ? (
                 <button
                   className="btn border-0 bg-transparent"
                   type="button"
@@ -146,4 +145,4 @@ const Booking = () => {
   );
 };
 
-export default Booking;
+export default Domicile;

@@ -15,7 +15,7 @@ const Domiciles = () => {
   }, [page])
 
   return (
-    <div className="container-fluid p-4">
+    <div className="container-fluid p-5 d-flex flex-column min-vh-100">
       {page >= 2 ? (
         <div className="container-fluid">
           {domicilesData.length === 0 ? (

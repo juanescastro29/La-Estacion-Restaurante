@@ -12,3 +12,19 @@
 .nav-link{
   color: #0f020a !important;
 }
+
+.count-products {
+	position: absolute;
+	top: 31.8%;
+  right: 15%;
+
+	background-color: #ada480;
+	color: #000;
+	width: 25px;
+	height: 25px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+}

@@ -3,10 +3,8 @@ import FormRegister from "../../components/FormRegister";
 
 function Register() {
   return (
-    <div className="container p-4">
-      <div className="row align-items-center bg-light rounded border p-2 border-1 border-dark">
-        <FormRegister />
-      </div>
+    <div className="container p-5 d-flex flex-column min-vh-100 bg-light rounded rounded-5 border p-4 border-1 border-dark animate__animated animate__fadeInDown mt-5 mb-5">
+      <FormRegister />
     </div>
   );
 }

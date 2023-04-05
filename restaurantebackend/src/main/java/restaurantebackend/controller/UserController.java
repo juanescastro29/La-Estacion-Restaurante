@@ -65,7 +65,7 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
         if(user.getRole().equals("USER")) {
-            response.put("route", "/home");
+            response.put("route", "/menu");
         }else {
             response.put("route", "/admin/products");
         }

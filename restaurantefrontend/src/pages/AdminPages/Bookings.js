@@ -17,7 +17,7 @@ const Bookings = () => {
   }, [page]);
 
   return (
-    <div className="container-fluid p-4">
+    <div className="container-fluid p-5 d-flex flex-column min-vh-100">
       {page >= 2 ? (
         <div className="container-fluid">
           {bookingsData.length === 0 ? (

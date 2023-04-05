@@ -3,6 +3,7 @@ import Home from "./pages/UserPages/Home";
 import Login from "./pages/UserPages/Login";
 import Menu from "./pages/UserPages/Menu";
 import Booking from "./pages/UserPages/Booking";
+import Domicile from './pages/UserPages/Domicile'
 import AdminProducts from "./pages/AdminPages/Products";
 import AdminClients from "./pages/AdminPages/Clients";
 import AdminBookings from "./pages/AdminPages/Bookings";
@@ -31,6 +32,7 @@ import {
   CLIENTS,
   DOMICILES,
   USERBOOKING,
+  USERDOMICILE,
 } from "./routes/PrivatePaths";
 
 function App() {
@@ -49,6 +51,14 @@ function App() {
               element={
                 <PrivateRouteUser>
                   <Booking />
+                </PrivateRouteUser>
+              }
+            />
+            <Route
+              path={USERDOMICILE}
+              element={
+                <PrivateRouteUser>
+                  <Domicile />
                 </PrivateRouteUser>
               }
             />

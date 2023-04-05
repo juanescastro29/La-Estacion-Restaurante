@@ -258,7 +258,7 @@ const FormRegister = () => {
           </div>
         )}
       </div>
-      <div className="d-grid col-12 mx-auto p-2 my-2">
+      <div className="d-grid col-12 mx-auto p-2 mt-3">
         <button
           className="btn"
           type="submit"

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import ConfirmModal from "./ConfirmModal";
 import EditModal from "./EditModal";
 import DetailsModal from "./DetailsModal";
+import { AdminContext } from "../context/AdminContext";
 
 const Table = ({ data, dataType }) => {
+  const { adminSession } = useContext(AdminContext);
   const [productEdit, setProductEdit] = useState([]);
   const [bookingEdit, setBookingEdit] = useState([]);
   const [domicileDetails, setDomicileDetails] = useState([]);
@@ -45,14 +47,30 @@ const Table = ({ data, dataType }) => {
           </caption>
         )}
         {dataType === "domiciles" && (
-          <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
-            Gestion Domicilios
-          </caption>
+          <>
+            {adminSession ? (
+              <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
+                Gestion Domicilios
+              </caption>
+            ) : (
+              <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
+                Mis Domicilios
+              </caption>
+            )}
+          </>
         )}
         {dataType === "bookings" && (
-          <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
-            Gestion Reservas
-          </caption>
+          <>
+            {adminSession ? (
+              <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
+                Gestion Reservas
+              </caption>
+            ) : (
+              <caption className="fs-3 fw-bolder" style={{ color: "#0f020a" }}>
+                Mis Reservas
+              </caption>
+            )}
+          </>
         )}
         <thead>
           {dataType === "products" && (
@@ -272,19 +290,23 @@ const Table = ({ data, dataType }) => {
                     <td align="center">
                       {bookingStatus === "Activa" && (
                         <>
-                          <button
-                            type="button"
-                            className="border-0 bg-transparent"
-                            data-bs-toggle="modal"
-                            data-bs-target="#editModal"
-                            onClick={() => searchBooking(bookingId)}
-                          >
-                            <i
-                              className="bi bi-pencil"
-                              style={{ fontSize: 20, color: "#0f020a" }}
-                            ></i>
-                          </button>
-                          <EditModal data={bookingEdit} type={"booking"} />
+                          {adminSession && (
+                            <>
+                              <button
+                                type="button"
+                                className="border-0 bg-transparent"
+                                data-bs-toggle="modal"
+                                data-bs-target="#editModal"
+                                onClick={() => searchBooking(bookingId)}
+                              >
+                                <i
+                                  className="bi bi-pencil"
+                                  style={{ fontSize: 20, color: "#0f020a" }}
+                                ></i>
+                              </button>
+                              <EditModal data={bookingEdit} type={"booking"} />
+                            </>
+                          )}
                         </>
                       )}
                     </td>

@@ -17,10 +17,14 @@ body {
   position: relative;
   width: 80px;
 }
-.f-modal-alert .f-modal-icon.f-modal-success, .f-modal-alert .f-modal-icon.f-modal-error {
-  border-color: #A5DC86;
+.f-modal-alert .f-modal-icon.f-modal-success,
+.f-modal-alert .f-modal-icon.f-modal-error {
+  border-color: #a5dc86;
 }
-.f-modal-alert .f-modal-icon.f-modal-success:after, .f-modal-alert .f-modal-icon.f-modal-success:before, .f-modal-alert .f-modal-icon.f-modal-error:after, .f-modal-alert .f-modal-icon.f-modal-error:before {
+.f-modal-alert .f-modal-icon.f-modal-success:after,
+.f-modal-alert .f-modal-icon.f-modal-success:before,
+.f-modal-alert .f-modal-icon.f-modal-error:after,
+.f-modal-alert .f-modal-icon.f-modal-error:before {
   background: #fff;
   content: "";
   height: 120px;
@@ -28,21 +32,24 @@ body {
   transform: rotate(45deg);
   width: 60px;
 }
-.f-modal-alert .f-modal-icon.f-modal-success:before, .f-modal-alert .f-modal-icon.f-modal-error:before {
+.f-modal-alert .f-modal-icon.f-modal-success:before,
+.f-modal-alert .f-modal-icon.f-modal-error:before {
   border-radius: 120px 0 0 120px;
   left: -33px;
   top: -7px;
   transform-origin: 60px 60px;
   transform: rotate(-45deg);
 }
-.f-modal-alert .f-modal-icon.f-modal-success:after, .f-modal-alert .f-modal-icon.f-modal-error:after {
+.f-modal-alert .f-modal-icon.f-modal-success:after,
+.f-modal-alert .f-modal-icon.f-modal-error:after {
   border-radius: 0 120px 120px 0;
   left: 30px;
   top: -11px;
   transform-origin: 0 60px;
   transform: rotate(-45deg);
 }
-.f-modal-alert .f-modal-icon.f-modal-success .f-modal-placeholder, .f-modal-alert .f-modal-icon.f-modal-error .f-modal-placeholder {
+.f-modal-alert .f-modal-icon.f-modal-success .f-modal-placeholder,
+.f-modal-alert .f-modal-icon.f-modal-error .f-modal-placeholder {
   border-radius: 50%;
   border: 4px solid rgba(165, 220, 134, 0.2);
   box-sizing: content-box;
@@ -53,7 +60,8 @@ body {
   width: 80px;
   z-index: 2;
 }
-.f-modal-alert .f-modal-icon.f-modal-success .f-modal-fix, .f-modal-alert .f-modal-icon.f-modal-error .f-modal-fix {
+.f-modal-alert .f-modal-icon.f-modal-success .f-modal-fix,
+.f-modal-alert .f-modal-icon.f-modal-error .f-modal-fix {
   background-color: #fff;
   height: 90px;
   left: 28px;
@@ -63,28 +71,31 @@ body {
   width: 5px;
   z-index: 1;
 }
-.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line, .f-modal-alert .f-modal-icon.f-modal-error .f-modal-line {
-  background-color: #A5DC86;
+.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line,
+.f-modal-alert .f-modal-icon.f-modal-error .f-modal-line {
+  background-color: #a5dc86;
   border-radius: 2px;
   display: block;
   height: 5px;
   position: absolute;
   z-index: 2;
 }
-.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line.f-modal-tip, .f-modal-alert .f-modal-icon.f-modal-error .f-modal-line.f-modal-tip {
+.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line.f-modal-tip,
+.f-modal-alert .f-modal-icon.f-modal-error .f-modal-line.f-modal-tip {
   left: 14px;
   top: 46px;
   transform: rotate(45deg);
   width: 25px;
 }
-.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line.f-modal-long, .f-modal-alert .f-modal-icon.f-modal-error .f-modal-line.f-modal-long {
+.f-modal-alert .f-modal-icon.f-modal-success .f-modal-line.f-modal-long,
+.f-modal-alert .f-modal-icon.f-modal-error .f-modal-line.f-modal-long {
   right: 8px;
   top: 38px;
   transform: rotate(-45deg);
   width: 47px;
 }
 .f-modal-alert .f-modal-icon.f-modal-error {
-  border-color: #F27474;
+  border-color: #f27474;
 }
 .f-modal-alert .f-modal-icon.f-modal-error .f-modal-x-mark {
   display: block;
@@ -95,7 +106,7 @@ body {
   border: 4px solid rgba(200, 0, 0, 0.2);
 }
 .f-modal-alert .f-modal-icon.f-modal-error .f-modal-line {
-  background-color: #F27474;
+  background-color: #f27474;
   top: 37px;
   width: 47px;
 }
@@ -108,11 +119,11 @@ body {
   transform: rotate(-45deg);
 }
 .f-modal-alert .f-modal-icon.f-modal-warning {
-  border-color: #F8BB86;
+  border-color: #f8bb86;
 }
 .f-modal-alert .f-modal-icon.f-modal-warning:before {
   -webkit-animation: pulseWarning 2s linear infinite;
-          animation: pulseWarning 2s linear infinite;
+  animation: pulseWarning 2s linear infinite;
   background-color: #fff;
   border-radius: 50%;
   content: "";
@@ -133,7 +144,7 @@ body {
   z-index: 1;
 }
 .f-modal-alert .f-modal-icon.f-modal-warning .f-modal-body {
-  background-color: #F8BB86;
+  background-color: #f8bb86;
   border-radius: 2px;
   height: 47px;
   left: 50%;
@@ -144,7 +155,7 @@ body {
   z-index: 2;
 }
 .f-modal-alert .f-modal-icon.f-modal-warning .f-modal-dot {
-  background-color: #F8BB86;
+  background-color: #f8bb86;
   border-radius: 50%;
   bottom: 10px;
   height: 7px;
@@ -160,51 +171,52 @@ body {
 
 .animateSuccessTip {
   -webkit-animation: animateSuccessTip 0.75s;
-          animation: animateSuccessTip 0.75s;
+  animation: animateSuccessTip 0.75s;
 }
 
 .animateSuccessLong {
   -webkit-animation: animateSuccessLong 0.75s;
-          animation: animateSuccessLong 0.75s;
+  animation: animateSuccessLong 0.75s;
 }
 
 .f-modal-icon.f-modal-success.animate:after {
   -webkit-animation: rotatePlaceholder 4.25s ease-in;
-          animation: rotatePlaceholder 4.25s ease-in;
+  animation: rotatePlaceholder 4.25s ease-in;
 }
 
 .f-modal-icon.f-modal-error.animate:after {
   -webkit-animation: rotatePlaceholder 4.25s ease-in;
-          animation: rotatePlaceholder 4.25s ease-in;
+  animation: rotatePlaceholder 4.25s ease-in;
 }
 
 .animateErrorIcon {
   -webkit-animation: animateErrorIcon 0.5s;
-          animation: animateErrorIcon 0.5s;
+  animation: animateErrorIcon 0.5s;
 }
 
 .animateXLeft {
   -webkit-animation: animateXLeft 0.75s;
-          animation: animateXLeft 0.75s;
+  animation: animateXLeft 0.75s;
 }
 
 .animateXRight {
   -webkit-animation: animateXRight 0.75s;
-          animation: animateXRight 0.75s;
+  animation: animateXRight 0.75s;
 }
 
 .scaleWarning {
   -webkit-animation: scaleWarning 0.75s infinite alternate;
-          animation: scaleWarning 0.75s infinite alternate;
+  animation: scaleWarning 0.75s infinite alternate;
 }
 
 .pulseWarningIns {
   -webkit-animation: pulseWarningIns 0.75s infinite alternate;
-          animation: pulseWarningIns 0.75s infinite alternate;
+  animation: pulseWarningIns 0.75s infinite alternate;
 }
 
 @-webkit-keyframes animateSuccessTip {
-  0%, 54% {
+  0%,
+  54% {
     width: 0;
     left: 1px;
     top: 19px;
@@ -227,7 +239,8 @@ body {
 }
 
 @keyframes animateSuccessTip {
-  0%, 54% {
+  0%,
+  54% {
     width: 0;
     left: 1px;
     top: 19px;
@@ -249,7 +262,8 @@ body {
   }
 }
 @-webkit-keyframes animateSuccessLong {
-  0%, 65% {
+  0%,
+  65% {
     width: 0;
     right: 46px;
     top: 54px;
@@ -266,7 +280,8 @@ body {
   }
 }
 @keyframes animateSuccessLong {
-  0%, 65% {
+  0%,
+  65% {
     width: 0;
     right: 46px;
     top: 54px;
@@ -283,18 +298,22 @@ body {
   }
 }
 @-webkit-keyframes rotatePlaceholder {
-  0%, 5% {
+  0%,
+  5% {
     transform: rotate(-45deg);
   }
-  100%, 12% {
+  100%,
+  12% {
     transform: rotate(-405deg);
   }
 }
 @keyframes rotatePlaceholder {
-  0%, 5% {
+  0%,
+  5% {
     transform: rotate(-45deg);
   }
-  100%, 12% {
+  100%,
+  12% {
     transform: rotate(-405deg);
   }
 }
@@ -319,7 +338,8 @@ body {
   }
 }
 @-webkit-keyframes animateXLeft {
-  0%, 65% {
+  0%,
+  65% {
     left: 82px;
     top: 95px;
     width: 0;
@@ -336,7 +356,8 @@ body {
   }
 }
 @keyframes animateXLeft {
-  0%, 65% {
+  0%,
+  65% {
     left: 82px;
     top: 95px;
     width: 0;
@@ -353,7 +374,8 @@ body {
   }
 }
 @-webkit-keyframes animateXRight {
-  0%, 65% {
+  0%,
+  65% {
     right: 82px;
     top: 95px;
     width: 0;
@@ -370,7 +392,8 @@ body {
   }
 }
 @keyframes animateXRight {
-  0%, 65% {
+  0%,
+  65% {
     right: 82px;
     top: 95px;
     width: 0;
@@ -420,7 +443,7 @@ body {
     opacity: 0.5;
   }
   100% {
-    background-color: #F8BB86;
+    background-color: #f8bb86;
     transform: scale(2);
     opacity: 0;
   }
@@ -437,24 +460,24 @@ body {
     opacity: 0.5;
   }
   100% {
-    background-color: #F8BB86;
+    background-color: #f8bb86;
     transform: scale(2);
     opacity: 0;
   }
 }
 @-webkit-keyframes pulseWarningIns {
   0% {
-    background-color: #F8D486;
+    background-color: #f8d486;
   }
   100% {
-    background-color: #F8BB86;
+    background-color: #f8bb86;
   }
 }
 @keyframes pulseWarningIns {
   0% {
-    background-color: #F8D486;
+    background-color: #f8d486;
   }
   100% {
-    background-color: #F8BB86;
+    background-color: #f8bb86;
   }
 }

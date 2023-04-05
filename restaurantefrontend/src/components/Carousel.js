@@ -2,22 +2,38 @@ import React from "react";
 
 const Carousel = ({ images }) => {
   return (
-
-    <div id="carouselVG" className="carousel slide p-2" data-bs-ride="carousel">
+    <div
+      id="carouselVG"
+      className="carousel slide p-2 animate__animated animate__fadeInUp"
+      data-bs-ride="carousel"
+    >
       <div className="carousel-inner">
         {images.map(({ src, id }) => (
-          <div
-            className="carousel-item active"
-            data-bs-interval="3000"
-            key={id}
-          >
-            <img
-              src={src}
-              className="d-block"
-              alt="carrousel"
-              style={{width: "100%", height: "410px"}}
-            />
-          </div>
+          <>
+            {id === "0" ? (
+              <div
+                className="carousel-item active"
+                data-bs-interval="4000"
+                key={id}
+              >
+                <img
+                  src={src}
+                  className="d-block"
+                  alt="carrousel"
+                  style={{ width: "100%", height: "410px" }}
+                />
+              </div>
+            ) : (
+              <div className="carousel-item" data-bs-interval="4000" key={id}>
+                <img
+                  src={src}
+                  className="d-block"
+                  alt="carrousel"
+                  style={{ width: "100%", height: "410px" }}
+                />
+              </div>
+            )}
+          </>
         ))}
       </div>
       <button

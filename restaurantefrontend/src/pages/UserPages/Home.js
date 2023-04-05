@@ -2,8 +2,8 @@ import React from "react";
 
 const Home = () => {
   return (
-      <div className="container p-4 align-items-center justify-content-center">
-        <div className="row g-2 p-4">
+      <div className="container align-items-center justify-content-center d-flex flex-column min-vh-100">
+        <div className="row animate__animated animate__fadeInDown">
           <div className="col-md-6 bg bg-dark text-white d-flex align-items-center text-center p-4">
             <h1>
               Restaurante

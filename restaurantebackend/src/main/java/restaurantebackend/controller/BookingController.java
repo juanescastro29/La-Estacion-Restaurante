@@ -6,7 +6,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurantebackend.model.Booking;
 import restaurantebackend.model.Product;
+import restaurantebackend.model.User;
 import restaurantebackend.service.BookingService;
+import restaurantebackend.service.UserService;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,9 +21,30 @@ public class BookingController {
 
     @Autowired
     private BookingService bookingService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/showBookings/{page}")
     public List<Booking> getBookingsPage(@PathVariable Integer page) {
+        ArrayList<Booking> bookingsLimited = new ArrayList<>();
+        int elements = 0;
+        int startLimit = (6*page)-6;
+
+        for (int i = startLimit; i < bookingService.getBookings().size(); i++) {
+            if (elements <= 5) {
+                bookingsLimited.add(bookingService.getBookings().get(i));
+                elements = elements + 1;
+            } else {
+                i = bookingService.getBookings().size();
+            }
+        }
+
+        return bookingsLimited;
+    }
+
+    @GetMapping("/showBookings/user/{userId}/{page}")
+    public List<Booking> getBookingsUser(@PathVariable Integer userId, @PathVariable Integer page) {
+        User user = userService.getUser(userId);
         ArrayList<Booking> bookingsLimited = new ArrayList<>();
         int elements = 0;
         int startLimit = (6*page)-6;

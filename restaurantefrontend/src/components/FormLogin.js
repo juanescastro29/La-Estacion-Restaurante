@@ -51,7 +51,7 @@ const Form = () => {
   }
 
   return (
-    <form className="row p-2 text-white animate__animated animate__fadeInDown" onSubmit={handleSubmit(login)}>
+    <form className="row p-2 text-white" onSubmit={handleSubmit(login)}>
       <div className="col-12 p-2">
         <h3 className="fw-bolder" style={{ color: "#0f020a" }}>
           Login

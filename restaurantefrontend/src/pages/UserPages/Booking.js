@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Table from "../../components/Table";
 import { UserContext } from "../../context/UserContext";
+import AddModal from "../../components/AddModal";
 
 const Booking = () => {
   const { user } = useContext(UserContext);
@@ -8,14 +9,15 @@ const Booking = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function fetchSponsorships() {
+    async function fetchBookings() {
       const response = await fetch(
         `http://localhost:8080/booking/showBookings/user/${user.userDocumentId}/${page}`
       );
       const data = await response.json();
       setBookingsData(data);
     }
-    fetchSponsorships();
+    console.log(user.userDocumentId);
+    fetchBookings();
   }, [page, user]);
 
   return (
@@ -25,7 +27,9 @@ const Booking = () => {
           {bookingsData.length === 0 ? (
             <>
               <Table data={bookingsData} dataType={"bookings"} />
-              <p className="text-center fs-3 fw-bolder">No hay reservas para mostrar.</p>
+              <p className="text-center fs-3 fw-bolder">
+                No hay reservas para mostrar.
+              </p>
             </>
           ) : (
             <Table data={bookingsData} dataType={"bookings"} />
@@ -78,7 +82,9 @@ const Booking = () => {
           {bookingsData.length === 0 ? (
             <>
               <Table data={bookingsData} dataType={"bookings"} />
-              <p className="text-center fs-3 fw-bolder">No hay reservas para mostrar.</p>
+              <p className="text-center fs-3 fw-bolder">
+                No hay reservas para mostrar.
+              </p>
             </>
           ) : (
             <Table data={bookingsData} dataType={"bookings"} />
@@ -142,6 +148,18 @@ const Booking = () => {
           </div>
         </div>
       )}
+      <div className="container-fluid text-end">
+        <button
+          type="button"
+          className="btn"
+          data-bs-toggle="modal"
+          data-bs-target="#addModal"
+          style={{ background: "#0f020a", color: "#dad49c" }}
+        >
+          Agendar Reserva
+        </button>
+        <AddModal type={"booking"}/>
+      </div>
     </div>
   );
 };

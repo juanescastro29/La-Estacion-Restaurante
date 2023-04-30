@@ -1,5 +1,4 @@
 import React from "react";
-
 const Home = () => {
   return (
       <div className="container align-items-center justify-content-center d-flex flex-column min-vh-100">

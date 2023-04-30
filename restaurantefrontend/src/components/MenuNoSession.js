@@ -57,7 +57,7 @@ const MenuNoSession = () => {
             background: isActive && "#dfcc97",
           })}
         >
-          Contactarnos
+          Contactanos
         </NavLink>
       </li>
     </>

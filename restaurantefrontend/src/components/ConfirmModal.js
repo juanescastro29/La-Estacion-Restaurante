@@ -2,7 +2,6 @@ import React from "react";
 
 const ConfirmModal = ({ type, id }) => {
   async function deleteProduct() {
-    console.log(id);
     await fetch(`http://localhost:8080/product/deleteProduct/${id}`, {
       method: "DELETE",
     });

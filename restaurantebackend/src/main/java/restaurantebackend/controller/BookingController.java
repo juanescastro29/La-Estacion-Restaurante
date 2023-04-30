@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurantebackend.model.Booking;
-import restaurantebackend.model.Product;
 import restaurantebackend.model.User;
 import restaurantebackend.service.BookingService;
 import restaurantebackend.service.UserService;
@@ -23,6 +22,12 @@ public class BookingController {
     private BookingService bookingService;
     @Autowired
     private UserService userService;
+
+    @PostMapping("/createBooking/")
+    public ResponseEntity<String> addBooking(@RequestBody Booking booking) {
+        bookingService.saveBooking(booking);
+        return new ResponseEntity<>("Booking create successfully", HttpStatus.OK);
+    }
 
     @GetMapping("/showBookings/{page}")
     public List<Booking> getBookingsPage(@PathVariable Integer page) {
@@ -49,12 +54,12 @@ public class BookingController {
         int elements = 0;
         int startLimit = (6*page)-6;
 
-        for (int i = startLimit; i < bookingService.getBookings().size(); i++) {
+        for (int i = startLimit; i < user.getBookings().size(); i++) {
             if (elements <= 5) {
-                bookingsLimited.add(bookingService.getBookings().get(i));
+                bookingsLimited.add(user.getBookings().get(i));
                 elements = elements + 1;
             } else {
-                i = bookingService.getBookings().size();
+                i = user.getBookings().size();
             }
         }
 

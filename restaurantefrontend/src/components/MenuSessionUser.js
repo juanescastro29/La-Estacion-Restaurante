@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import "./Navbar.css";
+import { CartContext } from "../context/CartContext";
 
-const MenuSessionUser = ({ cartItems }) => {
+const MenuSessionUser = () => {
   const { setUser, setSession } = useContext(UserContext);
+  const { setCartProducts, cartItems, setCartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
   function logout() {
@@ -12,6 +14,9 @@ const MenuSessionUser = ({ cartItems }) => {
     setSession(false);
     window.localStorage.removeItem("user");
     setUser({});
+    window.localStorage.removeItem("cartProducts");
+    setCartProducts([]);
+    setCartItems(0);
     navigate("/home");
   }
 

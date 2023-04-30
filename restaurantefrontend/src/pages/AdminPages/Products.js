@@ -7,14 +7,14 @@ const Products = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function fetchSponsorships() {
+    async function fetchProducts() {
       const response = await fetch(
         `http://localhost:8080/product/showProducts/${page}`
       );
       const data = await response.json();
       setProductsData(data);
     }
-    fetchSponsorships();
+    fetchProducts();
   }, [page]);
 
   return (

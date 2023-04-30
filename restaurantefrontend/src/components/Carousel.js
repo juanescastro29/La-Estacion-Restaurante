@@ -4,7 +4,7 @@ const Carousel = ({ images }) => {
   return (
     <div
       id="carouselVG"
-      className="carousel slide p-2 animate__animated animate__fadeInUp"
+      className="carousel slide p-2"
       data-bs-ride="carousel"
     >
       <div className="carousel-inner">

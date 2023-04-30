@@ -35,6 +35,12 @@ public class ProductController {
         return productsLimited;
     }
 
+    @GetMapping("/showProduct/{productId}")
+    public Product getProduct(@PathVariable Integer productId) {
+        Product product = productService.getProduct(productId);
+        return product;
+    }
+
     @PostMapping("/createProduct/")
     public ResponseEntity<Object> addProduct(@RequestBody Product product) {
         productService.saveProduct(product);

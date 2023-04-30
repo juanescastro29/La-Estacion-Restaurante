@@ -7,14 +7,14 @@ const Menu = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    async function fetchSponsorships() {
+    async function fetchProducts() {
       const response = await fetch(
         `http://localhost:8080/product/showProducts/${page}`
       );
       const data = await response.json();
       setProductsData(data);
     }
-    fetchSponsorships();
+    fetchProducts();
   }, [page]);
 
   return (
@@ -26,7 +26,7 @@ const Menu = () => {
               No hay menú disponible.
             </p>
           ) : (
-            <Cards data={productsData} type={"adoption"} />
+            <Cards data={productsData} />
           )}
           <div className="row">
             <div className="col text-end">

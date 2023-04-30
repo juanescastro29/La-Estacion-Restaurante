@@ -1,6 +1,8 @@
 package restaurantebackend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import restaurantebackend.model.Domicile;
 import restaurantebackend.model.User;
@@ -8,7 +10,9 @@ import restaurantebackend.service.DomicileService;
 import restaurantebackend.service.UserService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -19,6 +23,15 @@ public class DomicileController {
     private DomicileService domicileService;
     @Autowired
     private UserService userService;
+
+    @PostMapping("/createDomicile")
+    public ResponseEntity<Object> addDomicile(@RequestBody Domicile domicile) {
+        domicileService.saveDomicile(domicile);
+        Map<String, Object> response = new HashMap();
+        response.put("domicile", domicileService.getDomiciles().get(domicileService.getDomiciles().size() - 1));
+        response.put("text", "Domicile create successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
     @GetMapping("/showDomiciles/{page}")
     public List<Domicile> getDomicilesPage(@PathVariable Integer page) {

@@ -8,13 +8,13 @@ const Domicile = () => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function fetchSponsorships() {
+    async function fetchDomiciles() {
       const response = await fetch(`http://localhost:8080/domicile/showDomiciles/user/${user.userDocumentId}/${page}`);
       const data = await response.json();
       console.log(data);
       setDomicilesData(data);
     }
-    fetchSponsorships();
+    fetchDomiciles();
   }, [page, user])
 
   return (

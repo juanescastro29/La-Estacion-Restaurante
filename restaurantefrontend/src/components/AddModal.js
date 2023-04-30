@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { UserContext } from "../context/UserContext";
 
 const AddModal = ({ type }) => {
   const {
@@ -8,7 +10,9 @@ const AddModal = ({ type }) => {
     formState: { errors },
   } = useForm();
   const [productResponse, setProductResponse] = useState("");
+  const [bookingResponse, setBookingResponse] = useState("");
   const [categories, setCategories] = useState([]);
+  const { user } = useContext(UserContext)
 
   useEffect(() => {
     async function fetchCategories() {
@@ -39,13 +43,9 @@ const AddModal = ({ type }) => {
       dataForm.productImage = "";
     }
 
-    console.log(dataForm);
-
     dataForm.productCategory = categories.find((category) => {
       return category.categoryId === parseInt(dataForm.productCategory);
     });
-
-    console.log(dataForm);
 
     const update = {
       productName: dataForm.productName,
@@ -56,8 +56,6 @@ const AddModal = ({ type }) => {
       stock: parseInt(dataForm.productStock),
       category: dataForm.productCategory,
     };
-
-    console.log(update);
 
     const response = await fetch(
       `http://localhost:8080/product/createProduct/`,
@@ -70,7 +68,33 @@ const AddModal = ({ type }) => {
       }
     );
     const dataBack = await response.text();
+    console.log(dataBack);
     setProductResponse(dataBack);
+  }
+
+  async function createBooking(dataForm) {
+    const bookingData = {
+      user: user,
+      bookingDate: dataForm.dateBooking,
+      bookingHour: dataForm.bookingHour
+    }
+
+    console.log(bookingData);
+
+    const response = await fetch(
+      `http://localhost:8080/booking/createBooking/`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(bookingData),
+      }
+    );
+
+    const data = await response.text();
+    setBookingResponse(data);
+    console.log(data);
   }
 
   return (
@@ -286,7 +310,7 @@ const AddModal = ({ type }) => {
                       type="submit"
                       className="btn"
                       style={{ background: "#0f020a", color: "#dad49c" }}
-                      data-bs-target="#confirmEditModal"
+                      data-bs-target="#confirmAddModal"
                       data-bs-toggle="modal"
                     >
                       Crear producto
@@ -306,11 +330,136 @@ const AddModal = ({ type }) => {
           </div>
         </div>
       )}
+      {type === "booking" && (
+        <div
+          className="modal fade"
+          id="addModal"
+          tabIndex="-1"
+          aria-labelledby="addModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-lg modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Crear reserva</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <form
+                  className="row text-start"
+                  onSubmit={handleSubmit(createBooking)}
+                >
+                  <div className="col-6 p-3">
+                    <label
+                      htmlFor="dateBooking"
+                      className="form-label fw-bolder"
+                    >
+                      Fecha:
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control border-dark border-2"
+                      {...register("dateBooking", {
+                        required: true,
+                      })}
+                    />
+                    {errors.dateBooking?.type === "required" && (
+                      <div className="text-danger">
+                        <small>Este campo es requerido.</small>
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-6 p-3">
+                    <label
+                      htmlFor="bookingPersons"
+                      className="form-label fw-bolder"
+                    >
+                      Número de personas:
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control border-dark border-2"
+                      {...register("bookingPersons", {
+                        required: true,
+                        pattern: /^[0-9]+$/,
+                      })}
+                    />
+                    {errors.bookingPersons?.type === "required" && (
+                      <div className="text-danger">
+                        <small>Este campo es requerido.</small>
+                      </div>
+                    )}
+                    {errors.bookingPersons?.type === "pattern" && (
+                      <div className="text-danger">
+                        <small>
+                          No se permiten letras ni caracteres especiales.
+                        </small>
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-6 p-3">
+                    <label
+                      htmlFor="bookingHour"
+                      className="form-label fw-bolder"
+                    >
+                      Hora:
+                    </label>
+                    <select
+                      className="form-select border-dark"
+                      autoComplete="nope"
+                      {...register("bookingHour", { required: true })}
+                    >
+                      <option value="13:00">13:00</option>
+                      <option value="14:00">14:00</option>
+                      <option value="15:00">15:00</option>
+                      <option value="16:00">16:00</option>
+                      <option value="17:00">17:00</option>
+                      <option value="18:00">18:00</option>
+                      <option value="19:00">19:00</option>
+                      <option value="20:00">20:00</option>
+                      <option value="21:00">21:00</option>
+                    </select>
+                    {errors.bookingHour?.type === "required" && (
+                      <div className="text-danger">
+                        <small>Este campo es requerido.</small>
+                      </div>
+                    )}
+                  </div>
+                  <div className="modal-footer justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn"
+                      style={{ background: "#0f020a", color: "#dad49c" }}
+                      data-bs-target="#confirmBookingModal"
+                      data-bs-toggle="modal"
+                    >
+                      Crear reserva
+                    </button>
+                    <button
+                      type="button"
+                      className="btn"
+                      style={{ background: "#0f020a", color: "#dad49c" }}
+                      data-bs-dismiss="modal"
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <div
         className="modal fade"
-        id="confirmEditModal"
+        id="confirmAddModal"
         aria-hidden="true"
-        aria-labelledby="confirmEditModalLabel"
+        aria-labelledby="confirmAddModalLabel"
         tabIndex="-1"
       >
         <div className="modal-dialog modal-dialog-centered">
@@ -319,7 +468,7 @@ const AddModal = ({ type }) => {
               <button
                 type="button"
                 className="btn-close"
-                data-bs-dismiss="modal"
+                data-bs-dismiss="confirmAddModal"
                 aria-label="Close"
               ></button>
             </div>
@@ -355,13 +504,120 @@ const AddModal = ({ type }) => {
                   </p>
                 </>
               )}
+              {bookingResponse === "Booking create successfully" ? (
+                <>
+                  <div className="f-modal-alert">
+                    <div className="f-modal-icon f-modal-success animate">
+                      <span className="f-modal-line f-modal-tip animateSuccessTip"></span>
+                      <span className="f-modal-line f-modal-long animateSuccessLong"></span>
+                      <div className="f-modal-placeholder"></div>
+                      <div className="f-modal-fix"></div>
+                    </div>
+                  </div>
+                  <p className="fs-4 fw-bolder text-center">
+                    Reserva creada correctamente.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="f-modal-alert">
+                    <div className="f-modal-icon f-modal-error animate">
+                      <span className="f-modal-x-mark">
+                        <span className="f-modal-line f-modal-left animateXLeft"></span>
+                        <span className="f-modal-line f-modal-right animateXRight"></span>
+                      </span>
+                      <div className="f-modal-placeholder"></div>
+                      <div className="f-modal-fix"></div>
+                    </div>
+                  </div>
+                  <p className="fs-4 fw-bolder text-center">
+                    Error al crear la reserva.
+                  </p>
+                </>
+              )}
             </div>
             <div className="modal-footer justify-content-center">
-              {productResponse === "Product create successfully" ? (
+              {bookingResponse === "Booking create successfully" ? (
                 <button
                   type="button"
                   className="btn"
-                  data-bs-dismiss="modal"
+                  data-bs-dismiss="confirmAddModal"
+                  style={{ background: "#0f020a", color: "white" }}
+                  onClick={() => window.location.reload(false)}
+                >
+                  Aceptar
+                </button>
+              ) : (
+                <button
+                  type="button"
+                  className="btn"
+                  style={{ background: "#0f020a", color: "white" }}
+                  data-bs-target="#addModal"
+                  data-bs-toggle="modal"
+                >
+                  Aceptar
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal fade"
+        id="confirmBookingModal"
+        aria-hidden="true"
+        aria-labelledby="confirmBookingModalLabel"
+        tabIndex="-1"
+      >
+        <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="confirmBookingModal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body">
+              {bookingResponse === "Booking create successfully" ? (
+                <>
+                  <div className="f-modal-alert">
+                    <div className="f-modal-icon f-modal-success animate">
+                      <span className="f-modal-line f-modal-tip animateSuccessTip"></span>
+                      <span className="f-modal-line f-modal-long animateSuccessLong"></span>
+                      <div className="f-modal-placeholder"></div>
+                      <div className="f-modal-fix"></div>
+                    </div>
+                  </div>
+                  <p className="fs-4 fw-bolder text-center">
+                    Reserva creada correctamente.
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="f-modal-alert">
+                    <div className="f-modal-icon f-modal-error animate">
+                      <span className="f-modal-x-mark">
+                        <span className="f-modal-line f-modal-left animateXLeft"></span>
+                        <span className="f-modal-line f-modal-right animateXRight"></span>
+                      </span>
+                      <div className="f-modal-placeholder"></div>
+                      <div className="f-modal-fix"></div>
+                    </div>
+                  </div>
+                  <p className="fs-4 fw-bolder text-center">
+                    Error al crear la reserva.
+                  </p>
+                </>
+              )}
+            </div>
+            <div className="modal-footer justify-content-center">
+              {bookingResponse === "Booking create successfully" ? (
+                <button
+                  type="button"
+                  className="btn"
+                  data-bs-dismiss="confirmAddModal"
                   style={{ background: "#0f020a", color: "white" }}
                   onClick={() => window.location.reload(false)}
                 >

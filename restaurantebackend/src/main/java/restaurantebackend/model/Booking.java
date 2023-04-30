@@ -24,7 +24,7 @@ public class Booking {
     @Column(name = "bookingStatus")
     private String bookingStatus;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "documentId", referencedColumnName = "documentId", nullable = false)
     private User user;
 

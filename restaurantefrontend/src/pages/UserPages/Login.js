@@ -14,7 +14,7 @@ const Login = () => {
   ];
 
   return (
-    <div className="container-xl p-4 align-items-center justify-content-center d-flex flex-column min-vh-100">
+    <div className="container-xl p-4 align-items-center justify-content-center d-flex flex-column min-vh-100 animate__animated animate__bounceInDown">
       <div className="row">
         <div className="col-md-7 p-4">
           <Carousel images={images} />
